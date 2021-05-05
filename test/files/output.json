@@ -1,0 +1,22 @@
+{
+    "defaults_vcl_backend":{
+       "sensitive":false,
+       "type":"string",
+       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
+    },
+    "ssl_ca_cert_vcl_backend":{
+       "sensitive":false,
+       "type":"string",
+       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
+    },
+    "ssl_check_cert_vcl_backend":{
+       "sensitive":false,
+       "type":"string",
+       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
+    },
+    "ssl_sni_hostname_vcl_backend":{
+       "sensitive":false,
+       "type":"string",
+       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
+    }
+ }

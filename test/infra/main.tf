@@ -1,5 +1,4 @@
 # defaults
-
 variable "defaults_backend_name" {}
 variable "defaults_backend_host" {}
 
