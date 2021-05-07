@@ -1,22 +1,22 @@
 {
-    "defaults_vcl_backend":{
-       "sensitive":false,
-       "type":"string",
-       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
-    },
-    "ssl_ca_cert_vcl_backend":{
-       "sensitive":false,
-       "type":"string",
-       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
-    },
-    "ssl_check_cert_vcl_backend":{
-       "sensitive":false,
-       "type":"string",
-       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
-    },
-    "ssl_sni_hostname_vcl_backend":{
-       "sensitive":false,
-       "type":"string",
-       "value":" backend ${backend_name} {\n            .connect_timeout = ${connect_timeout};\n            .dynamic = ${dynamic};\n            .first_byte_timeout = ${first_byte_timeout};\n            .between_bytes_timeout = ${between_bytes_timeout};\n            .max_connections = ${max_connections};\n            .port = \"${backend_port}\";\n            .host = \"${backend_host}\";\n\n            .ssl = true;\n            ${ssl_sni_hostname_section}\n            .ssl_cert_hostname = \"${ssl_cert_hostname}\";\n            ${ssl_ca_cert_section}\n            .ssl_check_cert = ${ssl_check_cert};\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = ${probe_window};\n                .threshold = ${probe_threshold};\n                .timeout = ${probe_timeout};\n                .initial = ${probe_initial};\n                .interval = ${probe_interval};\n                ${dummy}\n            }\n        }"
-    }
- }
+   "defaults_vcl_backend":{
+      "sensitive":false,
+      "type":"string",
+      "value":" backend test-backend {\n            .connect_timeout = 5s;\n            .dynamic = true;\n            .first_byte_timeout = 20s;\n            .between_bytes_timeout = 20s;\n            .max_connections = 1000;\n            .port = \"443\";\n            .host = \"test-host\";\n\n            .ssl = true;\n            \n            .ssl_cert_hostname = \"test-host\";\n            \n            .ssl_check_cert = always;\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = 2;\n                .threshold = 1;\n                .timeout = 5s;\n                .initial = 1;\n                .interval = 60s;\n                .dummy = true;\n            }\n        }"
+   },
+   "ssl_ca_cert_vcl_backend":{
+      "sensitive":false,
+      "type":"string",
+      "value":" backend dummy-backend {\n            .connect_timeout = 5s;\n            .dynamic = true;\n            .first_byte_timeout = 20s;\n            .between_bytes_timeout = 20s;\n            .max_connections = 1000;\n            .port = \"443\";\n            .host = \"dummy-host\";\n\n            .ssl = true;\n            \n            .ssl_cert_hostname = \"dummy-host\";\n            .ssl_ca_cert = {\"line 1\nline 2\nline 3\n\"};\n            .ssl_check_cert = always;\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = 2;\n                .threshold = 1;\n                .timeout = 5s;\n                .initial = 1;\n                .interval = 60s;\n                .dummy = true;\n            }\n        }"
+   },
+   "ssl_check_cert_vcl_backend":{
+      "sensitive":false,
+      "type":"string",
+      "value":" backend dummy-backend {\n            .connect_timeout = 5s;\n            .dynamic = true;\n            .first_byte_timeout = 20s;\n            .between_bytes_timeout = 20s;\n            .max_connections = 1000;\n            .port = \"443\";\n            .host = \"dummy-host\";\n\n            .ssl = true;\n            \n            .ssl_cert_hostname = \"dummy-host\";\n            \n            .ssl_check_cert = never;\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = 2;\n                .threshold = 1;\n                .timeout = 5s;\n                .initial = 1;\n                .interval = 60s;\n                .dummy = true;\n            }\n        }"
+   },
+   "ssl_sni_hostname_vcl_backend":{
+      "sensitive":false,
+      "type":"string",
+      "value":" backend dummy-backend {\n            .connect_timeout = 5s;\n            .dynamic = true;\n            .first_byte_timeout = 20s;\n            .between_bytes_timeout = 20s;\n            .max_connections = 1000;\n            .port = \"443\";\n            .host = \"dummy-host\";\n\n            .ssl = true;\n            .ssl_sni_hostname = \"test-sni.hostname\";\n            .ssl_cert_hostname = \"dummy-host\";\n            \n            .ssl_check_cert = always;\n            .probe = {\n                .request = \"HEAD ${healthcheck_path} HTTP/1.1\" \"Connection: close\";\n                .window = 2;\n                .threshold = 1;\n                .timeout = 5s;\n                .initial = 1;\n                .interval = 60s;\n                .dummy = true;\n            }\n        }"
+   }
+}
